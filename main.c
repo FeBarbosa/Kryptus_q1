@@ -19,7 +19,7 @@
         - remove
         - first
         - last
-        - sort (bubble sort)
+        - sort (selection sort)
 */
 
 
