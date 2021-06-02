@@ -19,6 +19,7 @@
         - remove
         - first
         - last
+        - sort (bubble sort)
 */
 
 
@@ -27,7 +28,36 @@ typedef struct node {
     struct node* next;
 } node;
 
-void list(node *l){
+void sort_list(node *l){
+    if(l == NULL)
+        return;
+    
+    int aux_num;
+    node *aux_l = l;
+    node *aux_nxt;
+
+    while(aux_l->next != NULL)
+    {
+        aux_nxt = aux_l->next;
+
+        while(aux_nxt != NULL)
+        {
+            if(aux_l->num > aux_nxt->num)
+            {                    
+                aux_num = aux_l->num;
+                aux_l->num = aux_nxt->num;
+                aux_nxt->num = aux_num;
+            }
+            aux_nxt = aux_nxt->next;
+        }
+
+        aux_l = aux_l->next;
+    }
+
+    show_list(l);
+}
+
+void show_list(node *l){
     node *aux_l = l;
 
     while(aux_l != NULL){
@@ -101,7 +131,7 @@ void put(node** l, int num){
         aux_l->next = n;
     }
 
-    list(*l);
+    show_list(*l);
 
 }
 
@@ -148,7 +178,10 @@ int main(int argc, char *argv[]) {
             remove_node(&my_list, operand);
         }
         else if(strncmp(input, "list", 4) == 0){
-            list(my_list);
+            show_list(my_list);
+        }
+        else if(strncmp(input, "sort", 4) == 0){
+            sort_list(my_list);
         }
 
 		// print_entry(input);
